@@ -15,7 +15,7 @@ public abstract class MainFragment extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ac_main_fragment);
+        setContentView(R.layout.fr_main);
         if (savedInstanceState != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
