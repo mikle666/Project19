@@ -10,16 +10,16 @@ import android.support.v7.app.AppCompatActivity;
  * Created by mike on 06.02.2018.
  */
 
-public abstract class MainFragment extends AppCompatActivity {
+public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fr_main);
+        setContentView(R.layout.ac_single_fragment);
         if (savedInstanceState != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.main_fragment_container, getFragment())
+                    .replace(R.id.fragmentContainer, getFragment())
                     .commit();
         }
     }
