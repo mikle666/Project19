@@ -41,7 +41,6 @@ public class SearchFragment extends Fragment {
             Toast.makeText(getActivity(), "ПоИсК", Toast.LENGTH_LONG).show();
             String s1 = "http://www.google.com/search?q=";
             String url01 = s1.concat(mSearchEditText.getText().toString());
-            //showMessage(url01);
             Uri address = Uri.parse(url01);
             Intent openlinkIntent = new Intent(Intent.ACTION_VIEW, address);
             startActivity(openlinkIntent);

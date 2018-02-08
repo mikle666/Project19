@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Fragment;
@@ -17,7 +19,13 @@ import android.app.Fragment;
 
 public class SettingsFragment extends Fragment{
     private TextView mTextViewSettings1;
-    //private Button mButtonSearch;
+    private RadioGroup mRadioGroup;
+    private RadioButton mGoogleRB;
+    private RadioButton mYandexRB;
+    private RadioButton mBingRB;
+
+    //private RadioGroup
+
 
     public static SettingsFragment newInstance() {
         Bundle args = new Bundle();
@@ -27,21 +35,47 @@ public class SettingsFragment extends Fragment{
         return fragment;
     }
 
-    //private View.OnClickListener mOnButtonSearchClickListener = new View.OnClickListener() {
-    //    @Override
-    //    public void onClick(View v) {
-    //        //button search pressed
-    //    }
-   // };
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fr_settings, container, false);
         mTextViewSettings1 = v.findViewById(R.id.tvSettingsFrag1);
-       // mButtonSearch = v.findViewById(R.id.buttonSearch1);
+        mRadioGroup = v.findViewById(R.id.radioGroup);
+        //mRadioGroup.setOnCheckedChangeListener();
+        mGoogleRB = v.findViewById(R.id.google1);
+        mYandexRB = v.findViewById(R.id.yandex1);
+        mBingRB = v.findViewById(R.id.bing1);
 
-        //mButtonSearch.setOnClickListener(mOnButtonSearchClickListener);
+        mRadioGroup.clearCheck();
+
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case -1:
+                        Toast.makeText(getActivity(), "Ничего не выбрано",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.google1:
+                        Toast.makeText(getActivity(), "GOOGLE",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.yandex1:
+                        Toast.makeText(getActivity(), "YANDEX",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.bing1:
+                        Toast.makeText(getActivity(), "BING",
+                                Toast.LENGTH_SHORT).show();
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        });
+
+
         return v;
 
 
