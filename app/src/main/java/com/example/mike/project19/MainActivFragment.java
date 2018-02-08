@@ -6,23 +6,23 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.app.Fragment;
-
 /**
- * Created by mike on 06.02.2018.
+ * Created by mike on 08.02.2018.
  */
 
-public class SettingsFragment extends Fragment{
-    private TextView mTextViewSettings1;
+//public class MainActivFragment {
+//}
+
+public class MainActivFragment extends Fragment {
+    private TextView mTextViewMainFrag1;
     //private Button mButtonSearch;
 
-    public static SettingsFragment newInstance() {
+    public static MainActivFragment newInstance() {
         Bundle args = new Bundle();
 
-        SettingsFragment fragment = new SettingsFragment();
+        MainActivFragment fragment = new MainActivFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -32,14 +32,14 @@ public class SettingsFragment extends Fragment{
     //    public void onClick(View v) {
     //        //button search pressed
     //    }
-   // };
+    // };
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fr_settings, container, false);
-        mTextViewSettings1 = v.findViewById(R.id.tvSettingsFrag1);
-       // mButtonSearch = v.findViewById(R.id.buttonSearch1);
+        View v = inflater.inflate(R.layout.fr_main, container, false);
+        mTextViewMainFrag1 = v.findViewById(R.id.tvMainFrag1);
+        // mButtonSearch = v.findViewById(R.id.buttonSearch1);
 
         //mButtonSearch.setOnClickListener(mOnButtonSearchClickListener);
         return v;
