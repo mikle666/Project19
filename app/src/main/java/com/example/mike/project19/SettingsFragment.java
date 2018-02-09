@@ -1,5 +1,7 @@
 package com.example.mike.project19;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 //import android.support.v4.app.Fragment;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by mike on 06.02.2018.
  */
@@ -23,9 +27,15 @@ public class SettingsFragment extends Fragment{
     private RadioButton mGoogleRB;
     private RadioButton mYandexRB;
     private RadioButton mBingRB;
+    //public static final String APP_PREFERENCES = "mysettings";
+    //final String KEY_RADIOBUTTON_INDEX = "SAVED_RADIO_BUTTON_INDEX";
+
+    public static final String MY_SETTINGS = "my_settings";
+    public static final String KEY_RADIOBUTTON_INDEX = "KEY_RADIOBUTTON_INDEX";
+
+    private SharedPreferences mSharedPreferencesHelper;
 
     //private RadioGroup
-
 
     public static SettingsFragment newInstance() {
         Bundle args = new Bundle();
@@ -41,13 +51,22 @@ public class SettingsFragment extends Fragment{
         View v = inflater.inflate(R.layout.fr_settings, container, false);
         mTextViewSettings1 = v.findViewById(R.id.tvSettingsFrag1);
         mRadioGroup = v.findViewById(R.id.radioGroup);
-        //mRadioGroup.setOnCheckedChangeListener();
         mGoogleRB = v.findViewById(R.id.google1);
         mYandexRB = v.findViewById(R.id.yandex1);
         mBingRB = v.findViewById(R.id.bing1);
 
-        mRadioGroup.clearCheck();
+        mSharedPreferencesHelper = getActivity().getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
+       // ;
+        int sIndex = mSharedPreferencesHelper.getInt(MainActivity.KEY_RADIOBUTTON_INDEX,0);
+        Toast.makeText(getActivity(),Integer.toString(sIndex) , Toast.LENGTH_LONG).show();
 
+        if (sIndex==0){
+            mRadioGroup.clearCheck();
+        }else{
+            if (sIndex==1){
+                Toast.makeText(getActivity(),"GOOGOOOLE" , Toast.LENGTH_LONG).show();
+            }
+        }
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -59,14 +78,19 @@ public class SettingsFragment extends Fragment{
                     case R.id.google1:
                         Toast.makeText(getActivity(), "GOOGLE",
                                 Toast.LENGTH_SHORT).show();
+                        mSharedPreferencesHelper.edit().putInt(KEY_RADIOBUTTON_INDEX,1).commit();
+                        int xx = mSharedPreferencesHelper.getInt(KEY_RADIOBUTTON_INDEX,0);
+                        Toast.makeText(getActivity(),Integer.toString(xx) , Toast.LENGTH_LONG).show();
                         break;
                     case R.id.yandex1:
                         Toast.makeText(getActivity(), "YANDEX",
                                 Toast.LENGTH_SHORT).show();
+                        mSharedPreferencesHelper.edit().putInt(MainActivity.KEY_RADIOBUTTON_INDEX,2).commit();
                         break;
                     case R.id.bing1:
                         Toast.makeText(getActivity(), "BING",
                                 Toast.LENGTH_SHORT).show();
+                        mSharedPreferencesHelper.edit().putInt(MainActivity.KEY_RADIOBUTTON_INDEX,3).commit();
                         break;
 
                     default:

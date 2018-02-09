@@ -2,6 +2,8 @@ package com.example.mike.project19;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,11 +14,19 @@ import android.support.v4.app.Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String MY_SETTINGS = "my_settings";
+    public static final String KEY_RADIOBUTTON_INDEX = "KEY_RADIOBUTTON_INDEX";
+
+    private SharedPreferences mSharedPreferencesHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mSharedPreferencesHelper = getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
         // получаем экземпляр FragmentTransaction
+        Toast.makeText(this,Integer.toString(mSharedPreferencesHelper.getInt(KEY_RADIOBUTTON_INDEX,0)) , Toast.LENGTH_LONG).show();
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
@@ -26,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         MainActivFragment myFragment = new MainActivFragment();
         fragmentTransaction.add(R.id.container, myFragment);
         fragmentTransaction.commit();
+
     }
 
     @Override
