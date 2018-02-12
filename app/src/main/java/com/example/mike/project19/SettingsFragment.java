@@ -27,15 +27,12 @@ public class SettingsFragment extends Fragment{
     private RadioButton mGoogleRB;
     private RadioButton mYandexRB;
     private RadioButton mBingRB;
-    //public static final String APP_PREFERENCES = "mysettings";
-    //final String KEY_RADIOBUTTON_INDEX = "SAVED_RADIO_BUTTON_INDEX";
+
 
     public static final String MY_SETTINGS = "my_settings";
     public static final String KEY_RADIOBUTTON_INDEX = "KEY_RADIOBUTTON_INDEX";
 
     private SharedPreferences mSharedPreferencesHelper;
-
-    //private RadioGroup
 
     public static SettingsFragment newInstance() {
         Bundle args = new Bundle();
@@ -56,40 +53,41 @@ public class SettingsFragment extends Fragment{
         mBingRB = v.findViewById(R.id.bing1);
 
         mSharedPreferencesHelper = getActivity().getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
-       // ;
         int sIndex = mSharedPreferencesHelper.getInt(MainActivity.KEY_RADIOBUTTON_INDEX,0);
-        Toast.makeText(getActivity(),Integer.toString(sIndex) , Toast.LENGTH_LONG).show();
-
-        if (sIndex==0){
-            mRadioGroup.clearCheck();
-        }else{
-            if (sIndex==1){
-                Toast.makeText(getActivity(),"GOOGOOOLE" , Toast.LENGTH_LONG).show();
-            }
+        //Toast.makeText(getActivity(),Integer.toString(sIndex) , Toast.LENGTH_LONG).show();
+        switch (sIndex){
+            case 0:
+                mRadioGroup.clearCheck();
+                break;
+            case 1:
+                mRadioGroup.check(mGoogleRB.getId());
+                break;
+            case 2:
+                mRadioGroup.check(mYandexRB.getId());
+                break;
+            case 3:
+                mRadioGroup.check(mBingRB.getId());
+                break;
+            default:
+                break;
         }
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case -1:
-                        Toast.makeText(getActivity(), "Ничего не выбрано",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Ничего не выбрано", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.google1:
-                        Toast.makeText(getActivity(), "GOOGLE",
-                                Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "GOOGLE", Toast.LENGTH_SHORT).show();
                         mSharedPreferencesHelper.edit().putInt(KEY_RADIOBUTTON_INDEX,1).commit();
-                        int xx = mSharedPreferencesHelper.getInt(KEY_RADIOBUTTON_INDEX,0);
-                        Toast.makeText(getActivity(),Integer.toString(xx) , Toast.LENGTH_LONG).show();
                         break;
                     case R.id.yandex1:
-                        Toast.makeText(getActivity(), "YANDEX",
-                                Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "YANDEX", Toast.LENGTH_SHORT).show();
                         mSharedPreferencesHelper.edit().putInt(MainActivity.KEY_RADIOBUTTON_INDEX,2).commit();
                         break;
                     case R.id.bing1:
-                        Toast.makeText(getActivity(), "BING",
-                                Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "BING", Toast.LENGTH_SHORT).show();
                         mSharedPreferencesHelper.edit().putInt(MainActivity.KEY_RADIOBUTTON_INDEX,3).commit();
                         break;
 
@@ -98,11 +96,6 @@ public class SettingsFragment extends Fragment{
                 }
             }
         });
-
-
         return v;
-
-
-        //return super.onCreateView(name, context, attrs);
     }
 }

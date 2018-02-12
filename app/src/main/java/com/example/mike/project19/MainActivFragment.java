@@ -12,12 +12,9 @@ import android.app.Fragment;
  * Created by mike on 08.02.2018.
  */
 
-//public class MainActivFragment {
-//}
-
 public class MainActivFragment extends Fragment {
     private TextView mTextViewMainFrag1;
-    //private Button mButtonSearch;
+
 
     public static MainActivFragment newInstance() {
         Bundle args = new Bundle();
@@ -27,24 +24,12 @@ public class MainActivFragment extends Fragment {
         return fragment;
     }
 
-    //private View.OnClickListener mOnButtonSearchClickListener = new View.OnClickListener() {
-    //    @Override
-    //    public void onClick(View v) {
-    //        //button search pressed
-    //    }
-    // };
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fr_main, container, false);
         mTextViewMainFrag1 = v.findViewById(R.id.tvMainFrag1);
-        // mButtonSearch = v.findViewById(R.id.buttonSearch1);
-
-        //mButtonSearch.setOnClickListener(mOnButtonSearchClickListener);
         return v;
 
-
-        //return super.onCreateView(name, context, attrs);
     }
 }

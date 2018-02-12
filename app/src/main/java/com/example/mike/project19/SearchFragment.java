@@ -16,12 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Fragment;
 
-/**
- * Created by mike on 08.02.2018.
- */
 
-//public class SearchFragment {
-//}
 
 public class SearchFragment extends Fragment {
 
@@ -36,7 +31,6 @@ public class SearchFragment extends Fragment {
 
     public static SearchFragment newInstance() {
         Bundle args = new Bundle();
-
         SearchFragment fragment = new SearchFragment();
         fragment.setArguments(args);
         return fragment;
@@ -47,35 +41,24 @@ public class SearchFragment extends Fragment {
         public void onClick(View v) {
 
             mSharedPreferencesHelper = getActivity().getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
-            // ;
             int sIndex = mSharedPreferencesHelper.getInt(KEY_RADIOBUTTON_INDEX,0);
-           // Toast.makeText(getActivity(),Integer.toString(sIndex) , Toast.LENGTH_LONG).show();
             String s1 = "";
-
-            //button search pressed
-            Toast.makeText(getActivity(), "ПоИсК", Toast.LENGTH_LONG).show();
-            if (sIndex==1){
-                s1 = "http://www.google.com/search?q=";
-            }else {
-
-                if (sIndex == 2) {
+            switch (sIndex){
+                case 1:
+                    s1 = "http://www.google.com/search?q=";
+                    break;
+                case 2:
                     s1 = "https://yandex.ru/search/?text=";
-                }
+                    break;
+                case 3:
+                    s1 = "https://www.bing.com/search?q=";
+                    break;
+                default:
+                    break;
             }
-            if (sIndex==3){
-                s1 = "https://www.bing.com/search?q=";
-            }
-
-            //String s1 = "http://www.google.com/search?q=";
-
-
-
-            String url01 = s1.concat(mSearchEditText.getText().toString());
-            Uri address = Uri.parse(url01);
+            Uri address = Uri.parse(s1.concat(mSearchEditText.getText().toString()));
             Intent openlinkIntent = new Intent(Intent.ACTION_VIEW, address);
             startActivity(openlinkIntent);
-
-
         }
      };
 
@@ -88,7 +71,5 @@ public class SearchFragment extends Fragment {
         mButtonSearch.setOnClickListener(mOnButtonSearchClickListener);
         return v;
 
-
-        //return super.onCreateView(name, context, attrs);
     }
 }

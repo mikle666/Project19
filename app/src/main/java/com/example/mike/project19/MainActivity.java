@@ -25,14 +25,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mSharedPreferencesHelper = getSharedPreferences(MY_SETTINGS, Context.MODE_PRIVATE);
-        // получаем экземпляр FragmentTransaction
-        Toast.makeText(this,Integer.toString(mSharedPreferencesHelper.getInt(KEY_RADIOBUTTON_INDEX,0)) , Toast.LENGTH_LONG).show();
+       // Toast.makeText(this,Integer.toString(mSharedPreferencesHelper.getInt(KEY_RADIOBUTTON_INDEX,0)) , Toast.LENGTH_LONG).show();
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
                 .beginTransaction();
-
-        // добавляем фрагмент
         MainActivFragment myFragment = new MainActivFragment();
         fragmentTransaction.add(R.id.container, myFragment);
         fragmentTransaction.commit();
@@ -76,13 +73,3 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-
-
-//   FragmentManager fragmentManager = getFragmentManager();
-//   FragmentTransaction fragmentTransaction = fragmentManager
-//           .beginTransaction();
-
-// добавляем фрагмент
-//   SearchFragment  mySearchFragment = new SearchFragment();
-//   fragmentTransaction.add(R.id.container, mySearchFragment);
-//   fragmentTransaction.commit();
